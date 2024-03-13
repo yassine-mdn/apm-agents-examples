@@ -1,6 +1,6 @@
 # apm-agents-examples
 
-Example of instrumentation which plugs in to the Elastic node Agent and instruments an application and a python client to simulate trafic
+Example of instrumentation which plugs in to the Elastic node & python Agent and instruments an application and a python client to simulate trafic
 
 ## Installation
 
@@ -12,6 +12,17 @@ install [node](https://nodejs.org/en/download/current) LTS
 cd node-server
 npm install
 npm install elastic-apm-node --save
+```
+
+### flask server
+
+Setup virtual environment
+
+```bash
+cd flask-server
+py -3 -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
 ### python client
@@ -49,6 +60,15 @@ const apm = require('elastic-apm-node').start({
 ```bash
 cd node-server
 node .\index.js
+```
+
+### flask server
+
+use a virtul environment
+
+```bash
+cd flaskserver
+flask --app app run
 ```
 
 ### python client
