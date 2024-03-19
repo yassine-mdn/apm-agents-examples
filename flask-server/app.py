@@ -1,7 +1,6 @@
 from flask import Flask, abort
 from markupsafe import escape
 from elasticapm.contrib.flask import ElasticAPM
-from elasticapm import get_client
 
 app = Flask(__name__)
 
@@ -18,21 +17,17 @@ app.config['ELASTIC_APM'] = {
 }
 
 apm = ElasticAPM(app)
-client = get_client()
 
 @app.route("/")
 def hello_world():
-    client.capture_message('/')
     return "<p>Hello, World!</p>"
 
 @app.route("/path/<param>")
 def path(param):
-    client.capture_message('path')
     return f'path {escape(param)}'
 
 @app.route("/demo")
 def demo():
-    client.capture_message('demo')
     return "<p>Demo page</p>"
 
 
@@ -43,5 +38,4 @@ def error_route():
 
 @app.errorhandler(500)
 def page_not_found(e):
-    client.capture_exception()
     return "Error page", 500
